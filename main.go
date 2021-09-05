@@ -3,11 +3,9 @@
 = "coordTransform" =
 
 [
-|*| Source: https://github.com/MasterInQuestion/coordtransform
-|*| Last update: CE 2021-09-05 11:55 UTC ]
+|*| Source: https://github.com/MasterInQuestion/coordtransform/raw/master/main.go
+|*| Last update: CE 2021-09-05 15:42 UTC ]
 
-
-TEST
 
 Go implementation for converting several China obfuscated GPS coordinate schemas back into the regular form (and vice versa).
 
