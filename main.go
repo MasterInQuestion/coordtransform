@@ -7,6 +7,8 @@
 |*| Last update: CE 2021-09-05 11:55 UTC ]
 
 
+TEST
+
 Go implementation for converting several China obfuscated GPS coordinate schemas back into the regular form (and vice versa).
 
 Currently supported:
