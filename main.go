@@ -4,7 +4,7 @@
 
 [
 |*| Source: https://github.com/MasterInQuestion/coordtransform/raw/master/main.go
-|*| Last update: CE 2021-09-05 15:42 UTC ]
+|*| Last update: CE 2021-09-15 08:09 UTC ]
 
 
 Go implementation for converting several China obfuscated GPS coordinate schemas back into the regular form (and vice versa).
@@ -91,7 +91,7 @@ But no matter how the function is designed it would always fail on border cases.
 |*| BD09 ("bd09ll"): 又 百度坐标系, 由 GCJ02 混淆后的坐标系. 应用于部分 百度地图 API. ]
 
 |*| WGS84: known as Coordinate System for Earth, the internationally exchangeable coordinate system.
-|*| GCJ02: known as Coordinate System for Mars, obfuscated coordinate system based on WGS84. Used by Google Maps, AutoNavi (高德).
+|*| GCJ02: known as Coordinate System for Mars, obfuscated coordinate system based on WGS84. Used by Google Maps, Amap (高德).
 |*| BD09 ("bd09ll"): known as Baidu Coordinate System, obfuscated coordinate system based on GCJ02. Used by some Baidu Map's API.
 |*| BD09MC: Baidu's another vain attempt at white-box cryptography. The schema's output sort of resembles EPSG3857 [ https://epsg.io/3857 ]. Used by some Baidu Map's API.
 
@@ -119,6 +119,15 @@ Several other implementations have been referred:
 |*| https://atool.vip/lnglat/
 
 ; but only find out that they were either no better or worse.
+
+
+[ Additional Note:
+
+This implementation appears to give output practically identical to:
+|*| Amap's API ([ https://uri.amap.com/marker?coordinate=wgs84&position=E,N ], replace the "position" parameter accordingly; or try this online demo: [ https://lbs.amap.com/api/webservice/guide/api/convert#satisfy-container ]);
+|*| Tencent Map's API ([ https://apis.map.qq.com/uri/v1/marker?coord_type=1&marker=title:-;coord:N,E ], adapt the "coord" part of the "marker" parameter accordingly).
+
+The 2 services seem to interpret the coordinates specially: the very "incorrect" coordinates would map to acceptable locations in their interface whereas the "correct" ones would be off. ]
 
 */
 	if (
