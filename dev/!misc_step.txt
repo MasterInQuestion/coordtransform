@@ -1,0 +1,68 @@
+= Misc of the stepping data =
+
+Sample command for getting "BD09 (Referential)":
+(Unix Shell)
+[
+	for x0 in 75 80 85 90 95 100 105 110 115 120 125 130; do curl -v -o "$null" 'https://api.map.baidu.com/marker?output=html&coord_type=wgs84&location=45,'"$x0" 2>&1 | grep -P -e '(?<=^< Location: ).*$' -o | perlp 's/.*[?&]latlng=(-?\d+(?:\.\d+)),(-?\d+(?:\.\d+)).*/${1}, ${2}/;'; sleep 1; done;
+]
+
+Don't expect it to work directly on common systems.
+
+
+Prerequisites:
+
+|1| "$null" is '/dev/null'. (`export null='/dev/null';`)
+|2| `curl`:
+[
+	exec '/usr/bin/curl' -q \
+	--no-progress-meter \
+	--compressed \
+	-A '' \
+	-g "$@";
+]
+
+|3| `perlp`:
+[
+	PERLIO=':raw:utf8' exec '/usr/bin/perl' -p \
+	-e 'BEGIN { $^H |= 0x02800000; $^H{reflags_charset} = 4; $/ = undef(); }' \
+	-e "$@";
+]
+
+
+
+
+Snippet for the stepping data generation:
+(Go)
+[
+	func main () {
+	WGS84 := [2](float64){ 30, 130 };
+	BD09 := [2](float64){ 30.003396, 130.011903 };
+
+	Print(
+	`[` + "\n",
+	`|*| WGS84: ` + fp6( WGS84[0], WGS84[1] ) + "\n",
+	`|*| WGS84 (Back-Derived): ` + fp6( BD09toWGS84( BD09[0], BD09[1] ) ) + "\n",
+	`|*| GCJ02 (Back-Derived): ` + fp8( BD09toGCJ02( BD09[0], BD09[1] ) ) + "\n",
+	`|*| GCJ02: ` + fp8( WGS84toGCJ02( WGS84[0], WGS84[1] ) ) + "\n",
+	`|*| BD09: ` + fp6( WGS84toBD09( WGS84[0], WGS84[1] ) ) + "\n",
+	`|*| BD09 (Referential): ` + fp6( BD09[0], BD09[1] ) + ` ]` + "\n",
+	);
+
+	};
+
+
+	func fp8 (
+	_0 float64,
+	_1 float64,
+	) (
+	string,
+	) {
+
+	{ return (
+	RE_0.ReplaceAllLiteralString( Sprintf( `%.8f`, _0 ), `` ) +
+	`, ` +
+	RE_0.ReplaceAllLiteralString( Sprintf( `%.8f`, _1 ), `` ) )
+	};
+
+	};
+]
