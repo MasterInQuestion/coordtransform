@@ -4,7 +4,7 @@
 
 [
 |*| Source: https://github.com/MasterInQuestion/coordtransform/raw/master/main.go
-|*| Last update: CE 2021-09-15 08:09 UTC ]
+|*| Last update: CE 2021-10-05 07:23 UTC ]
 
 
 Go implementation for converting several China obfuscated GPS coordinate schemas back into the regular form (and vice versa).
@@ -149,8 +149,7 @@ The 2 services seem to interpret the coordinates specially: the very "incorrect"
 
 	x5 := N * Pi_180;
 	x6 := 1 - Offset * Pow( Sin( x5 ), 2 );
-	x7 := Sqrt( x6 );
-	x8 := Axis / x7;
+	x7 := Axis / Sqrt( x6 );
 
 	{ return (
 	N + ( (x4 +
@@ -159,7 +158,7 @@ The 2 services seem to interpret the coordinates specially: the very "incorrect"
 	160 * Sin( x0 / 12 ) +
 	320 * Sin( x0 / 30 ) ) / 1.5 +
 	_N * 3 + _E * 2 + x2 / 10 + (Pow( _N, 2 ) + x3) / 5 - 100) /
-	x8 / (1 - Offset) * x6 / Pi_180 ),
+	x7 / (1 - Offset) * x6 / Pi_180 ),
 
 	(
 	E + ( (x4 +
@@ -168,7 +167,7 @@ The 2 services seem to interpret the coordinates specially: the very "incorrect"
 	150 * Sin( x1 / 12 ) +
 	300 * Sin( x1 / 30 ) ) / 1.5 +
 	_N * 2 + _E + (Pow( _E, 2 ) + x2 + x3) / 10 + 300) /
-	x8 / Cos( x5 ) / Pi_180 )
+	x7 / Cos( x5 ) / Pi_180 )
 	};
 
 	};
@@ -228,8 +227,7 @@ The 2 services seem to interpret the coordinates specially: the very "incorrect"
 
 	x5 := N * Pi_180;
 	x6 := 1 - Offset * Pow( Sin( x5 ), 2 );
-	x7 := Sqrt( x6 );
-	x8 := Axis / x7;
+	x7 := Axis / Sqrt( x6 );
 
 	{ return (
 	N - ( (x4 +
@@ -238,7 +236,7 @@ The 2 services seem to interpret the coordinates specially: the very "incorrect"
 	160 * Sin( x0 / 12 ) +
 	320 * Sin( x0 / 30 ) ) / 1.5 +
 	_N * 3 + _E * 2 + x2 / 10 + (Pow( _N, 2 ) + x3) / 5 - 100) /
-	x8 / (1 - Offset) * x6 / Pi_180 ),
+	x7 / (1 - Offset) * x6 / Pi_180 ),
 
 	(
 	E - ( (x4 +
@@ -247,7 +245,7 @@ The 2 services seem to interpret the coordinates specially: the very "incorrect"
 	150 * Sin( x1 / 12 ) +
 	300 * Sin( x1 / 30 ) ) / 1.5 +
 	_N * 2 + _E + (Pow( _E, 2 ) + x2 + x3) / 10 + 300) /
-	x8 / Cos( x5 ) / Pi_180 )
+	x7 / Cos( x5 ) / Pi_180 )
 	};
 
 	};
