@@ -3,7 +3,7 @@
 Sample command for getting "BD09 (Referential)":
 (Unix Shell)
 [
-	for x0 in 75 80 85 90 95 100 105 110 115 120 125 130; do curl -v -o "$null" 'https://api.map.baidu.com/marker?output=html&coord_type=wgs84&location=45,'"$x0" 2>&1 | grep -P -e '^< Location: \K.*$' -o | perlp 's/.*[?&]latlng=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?).*/${1}, ${2}/s;'; sleep 1; done;
+	for x0 in 75 80 85 90 95 100 105 110 115 120 125 130; do curl -v -o "$null" 'https://api.map.baidu.com/marker?output=html&coord_type=wgs84&location=45,'"$x0" 2>&1 | grep -P -e '^< Location: \K.*$' -o | perlp 's/.*?[?&]latlng=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?).*/${1}, ${2}/s;'; sleep 1; done;
 ]
 
 Don't expect it to work directly on common systems.
