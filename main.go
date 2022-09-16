@@ -4,7 +4,7 @@
 
 [
 |*| Source: https://github.com/MasterInQuestion/coordtransform/raw/master/main.go
-|*| Last update: CE 2021-10-05 07:23 UTC ]
+|*| Last update: CE 2022-09-16 21:18 UTC ]
 
 
 Go implementation for converting several China obfuscated GPS coordinate schemas back into the regular form (and vice versa).
@@ -108,7 +108,7 @@ But no matter how the function is designed it would always fail on border cases.
 	) {
 /*
 
-Current implementation of this function provides inadequate accuracy (~ 10 m).
+Current implementation of this function provides suboptimal accuracy (~ 1 m).
 
 
 Several other implementations have been referred:
@@ -127,7 +127,7 @@ This implementation appears to give output practically identical to:
 |*| Amap's API ([ https://uri.amap.com/marker?coordinate=wgs84&position=E,N ], replace the "position" parameter accordingly; or try this online demo: [ https://lbs.amap.com/api/webservice/guide/api/convert#satisfy-container ]);
 |*| Tencent Map's API ([ https://apis.map.qq.com/uri/v1/marker?coord_type=1&marker=title:-;coord:N,E ], adapt the "coord" part of the "marker" parameter accordingly).
 
-The 2 services seem to interpret the coordinates specially: the very "incorrect" coordinates would map to acceptable locations in their interface whereas the "correct" ones would be off. ]
+~~The 2 services seem to interpret the coordinates specially: the very "incorrect" coordinates would map to acceptable locations in their interface whereas the "correct" ones would be off.~~ [ Conclusion based on false premise. ] ]
 
 */
 	if (
