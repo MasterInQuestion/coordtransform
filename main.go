@@ -4,7 +4,7 @@
 
 	[
 	|*| Source: https://github.com/MasterInQuestion/coordTransform/raw/master/main.go
-	|*| Last update: CE 2022-09-16 22:22 UTC ]
+	|*| Last update: CE 2022-09-16 23:40 UTC ]
 
 ----
 
@@ -626,7 +626,7 @@
 	BD09MC := [2](float64){ 12684001, 2560682.4 };
 
 	Print(
-	`|*| WGS84toGCJ02: ` + fp6( WGS84toGCJ02( WGS84[0], WGS84[1] ) ) + "\n", // Yet problematic.
+	`|*| WGS84toGCJ02: ` + fp6( WGS84toGCJ02( WGS84[0], WGS84[1] ) ) + "\n", // Yet problematic. (probably not as much)
 	`|*| WGS84toBD09: ` + fp6( WGS84toBD09( WGS84[0], WGS84[1] ) ) + "\n",
 	`|*| WGS84toBD09MC: ` + fp1( WGS84toBD09MC( WGS84[0], WGS84[1] ) ) + "\n",
 	"\n",
