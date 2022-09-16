@@ -2,20 +2,21 @@
 
 = "coordTransform" =
 
-[
-|*| Source: https://github.com/MasterInQuestion/coordtransform/raw/master/main.go
-|*| Last update: CE 2022-09-16 21:18 UTC ]
+	[
+	|*| Source: https://github.com/MasterInQuestion/coordtransform/raw/master/main.go
+	|*| Last update: CE 2022-09-16 21:50 UTC ]
 
+----
 
-Go implementation for converting several China obfuscated GPS coordinate schemas back into the regular form (and vice versa).
+	Go implementation for converting several China obfuscated GPS coordinate schemas back into the regular form (and vice versa).
 
-Currently supported:
-|*| WGS84 <-> GCJ02
-|*| WGS84 <-> BD09 ("bd09ll")
-|*| WGS84 <-> BD09MC
-|*| GCJ02 <-> BD09 ("bd09ll")
-|*| GCJ02 <-> BD09MC
-|*| BD09 ("bd09ll") <-> BD09MC
+	Currently supported:
+	|*| WGS84 <-> GCJ02
+	|*| WGS84 <-> BD09 ("bd09ll")
+	|*| WGS84 <-> BD09MC
+	|*| GCJ02 <-> BD09 ("bd09ll")
+	|*| GCJ02 <-> BD09MC
+	|*| BD09 ("bd09ll") <-> BD09MC
 
 */
 
@@ -40,12 +41,11 @@ Currently supported:
 	Offset float64 = 0.006693421622965943;
 /*
 
-Offset =
-((
-2 / F - 1 / F^2
-))
-, where:
-|*| F = 298.3
+	Offset = ((
+	2 / F - 1 / F^2
+	))
+	, where:
+	|*| F = 298.3
 
 */
 	Pi_180 float64 = Pi / 180;
@@ -71,12 +71,11 @@ Offset =
 	};
 /*
 
-Region preview:
-|*| https://www.openstreetmap.org/?bbox=73.55,17.95752,134.75,53.56082&mlat=17.95752&mlon=73.55
-|*| https://www.openstreetmap.org/?bbox=73.55,17.95752,134.75,53.56082&mlat=53.56082&mlon=134.75
+	Region preview:
+	|*| https://www.openstreetmap.org/?bbox=73.55,17.95752,134.75,53.56082&mlat=17.95752&mlon=73.55
+	|*| https://www.openstreetmap.org/?bbox=73.55,17.95752,134.75,53.56082&mlat=53.56082&mlon=134.75
 
-
-But no matter how the function is designed it would always fail on border cases. (per the incompatible nature of GCJ02)
+	But no matter how the function is designed it would always fail on border cases. (per the incompatible nature of GCJ02)
 
 */
 	};
@@ -85,15 +84,15 @@ But no matter how the function is designed it would always fail on border cases.
 // === Primary functions ===
 /*
 
-[
-|*| WGS84: 又 地球坐标系, 国际通行坐标系.
-|*| GCJ02: 又 火星坐标系, 由 WGS84 混淆后的坐标系. Google Maps, 高德 在用.
-|*| BD09 ("bd09ll"): 又 百度坐标系, 由 GCJ02 混淆后的坐标系. 应用于部分 百度地图 API. ]
+	[
+	|*| WGS84: 又 地球坐标系, 国际通行坐标系.
+	|*| GCJ02: 又 火星坐标系, 由 WGS84 混淆后的坐标系. Google Maps, 高德 在用.
+	|*| BD09 ("bd09ll"): 又 百度坐标系, 由 GCJ02 混淆后的坐标系. 应用于部分 百度地图 API. ]
 
-|*| WGS84: known as Coordinate System for Earth, the internationally exchangeable coordinate system.
-|*| GCJ02: known as Coordinate System for Mars, obfuscated coordinate system based on WGS84. Used by Google Maps, Amap (高德).
-|*| BD09 ("bd09ll"): known as Baidu Coordinate System, obfuscated coordinate system based on GCJ02. Used by some Baidu Map's API.
-|*| BD09MC: Baidu's another vain attempt at white-box cryptography. The schema's output sort of resembles EPSG3857 [ https://epsg.io/3857 ]. Used by some Baidu Map's API.
+	|*| WGS84: known as Coordinate System for Earth, the internationally exchangeable coordinate system.
+	|*| GCJ02: known as Coordinate System for Mars, obfuscated coordinate system based on WGS84. Used by Google Maps, Amap (高德).
+	|*| BD09 ("bd09ll"): known as Baidu Coordinate System, obfuscated coordinate system based on GCJ02. Used by some Baidu Map's API.
+	|*| BD09MC: Baidu's another vain attempt at white-box cryptography. The schema's output sort of resembles EPSG3857 [ https://epsg.io/3857 ]. Used by some Baidu Map's API.
 
 */
 // ==== Basic ====
@@ -108,26 +107,22 @@ But no matter how the function is designed it would always fail on border cases.
 	) {
 /*
 
-Current implementation of this function provides suboptimal accuracy (~ 1 m).
+	Current implementation of this function provides suboptimal accuracy (~ 1 m).
 
-
-Several other implementations have been referred:
-|*| https://github.com/wandergis/coordtransform
-|*| https://github.com/kikkimo/WgsToGcj/blob/master/src/WGS2GCJ.cpp
-|*| https://github.com/Artoria2e5/PRCoords
-|*| https://chaoli.club/index.php/4777/p1#p49268
-|*| https://atool.vip/lnglat/
-
-; but only find out that they were either no better or worse.
-
+	Several other implementations have been referred:
+	|*| https://github.com/wandergis/coordtransform
+	|*| https://github.com/kikkimo/WgsToGcj/blob/master/src/WGS2GCJ.cpp
+	|*| https://github.com/Artoria2e5/PRCoords
+	|*| https://chaoli.club/index.php/4777/p1#p49268
+	|*| https://atool.vip/lnglat/
+	; but only find out that they were either no better or worse.
 
 [ Additional Note:
-
-This implementation appears to give output practically identical to:
-|*| Amap's API ([ https://uri.amap.com/marker?coordinate=wgs84&position=E,N ], replace the "position" parameter accordingly; or try this online demo: [ https://lbs.amap.com/api/webservice/guide/api/convert#satisfy-container ]);
-|*| Tencent Map's API ([ https://apis.map.qq.com/uri/v1/marker?coord_type=1&marker=title:-;coord:N,E ], adapt the "coord" part of the "marker" parameter accordingly).
-
-~~The 2 services seem to interpret the coordinates specially: the very "incorrect" coordinates would map to acceptable locations in their interface whereas the "correct" ones would be off.~~ [ Conclusion based on false premise. ] ]
+	This implementation appears to give output practically identical to:
+	|*| Amap's API ([ https://uri.amap.com/marker?coordinate=wgs84&position=E,N ], replace the "position" parameter accordingly; or try this online demo: [ https://lbs.amap.com/api/webservice/guide/api/convert#satisfy-container ]);
+	|*| Tencent Map's API ([ https://apis.map.qq.com/uri/v1/marker?coord_type=1&marker=title:-;coord:N,E ], adapt the "coord" part of the "marker" parameter accordingly).
+	.
+	~~The 2 services seem to interpret the coordinates specially: the very "incorrect" coordinates would map to acceptable locations in their interface whereas the "correct" ones would be off.~~ [ Conclusion based on false premise. ] ]
 
 */
 	if (
@@ -339,7 +334,7 @@ This implementation appears to give output practically identical to:
 	) {
 /*
 
-See "BD09MCtoBD09" for notes.
+	See "BD09MCtoBD09" for notes.
 
 */
 	if ( E > 180 ) {
@@ -475,7 +470,8 @@ See "BD09MCtoBD09" for notes.
 	) {
 /*
 
-Both this and the "BD09toBD09MC" function have been verified of being algorithmically correct. But some of the interpolation modifiers (values conditionally assigned to "n") are either incorrect or of inadequate accuracy.
+	Both this and the "BD09toBD09MC" function have been verified of being algorithmically correct.
+	But some of the interpolation modifiers (values conditionally assigned to "n") are either incorrect or of inadequate accuracy.
 
 */
 	if ( X > 20037726.372307256 ) {
@@ -603,23 +599,23 @@ Both this and the "BD09toBD09MC" function have been verified of being algorithmi
 // === Testcase ===
 /*
 
-Try at [ https://play.golang.org/p/UCPdVNrl0-P#code ]. (slight modification to the code required)
+	Try at [ https://go.dev/play/p/UCPdVNrl0-P#code ]. (slight modification to the code required)
 
 ==== Demo places ====
 
-(40.049694° N, 116.294717° E; WGS84) China, Běi-Jīng, Seas Settled District, Top Land 10th Street #10: Baidu Building (中国, 北京, 海淀区, 上地十街 #10: 百度大厦):
-|*| https://www.openstreetmap.org/?mlat=40.049694&mlon=116.294717#map=19/40.049694/116.294717
-|*| https://www.google.com/maps/place/40.050962,116.30081/@40.050962,116.30081,19z?hl=en
-|*| https://map.baidu.com/?latlng=40.057117,116.307236
-|*| https://map.baidu.com/@12947403.2,4846489.6,19z
+	(40.049694° N, 116.294717° E; WGS84) China, Běi-Jīng, Seas Settled District, Top Land 10th Street #10: Baidu Building (中国, 北京, 海淀区, 上地十街 #10: 百度大厦):
+	|*| https://www.openstreetmap.org/?mlat=40.049694&mlon=116.294717#map=19/40.049694/116.294717
+	|*| https://www.google.com/maps/place/40.050962,116.30081/@40.050962,116.30081,19z?hl=en
+	|*| https://map.baidu.com/?latlng=40.057117,116.307236
+	|*| https://map.baidu.com/@12947403.2,4846489.6,19z
 
-(22.543415° N, 113.929665° E; WGS84) China, Canton Province, Shēn-Zhèn, South Mountain District, South Shēn Avenue #10000: Tencent Building (中国, 广东省, 深圳, 南山区, 深南大道 #10000: 腾讯大厦):
-|*| https://api.map.baidu.com/marker?output=html&coord_type=wgs84&location=22.543415,113.929665
-|*| https://api.map.baidu.com/marker?output=html&coord_type=gcj02&location=22.540385,113.934532
-|*| https://api.map.baidu.com/marker?output=html&coord_type=bd09ll&location=22.546054,113.94108
-|*| https://api.map.baidu.com/marker?output=html&coord_type=bd09mc&location=12684001,2560682.4
+	(22.543415° N, 113.929665° E; WGS84) China, Canton Province, Shēn-Zhèn, South Mountain District, South Shēn Avenue #10000: Tencent Building (中国, 广东省, 深圳, 南山区, 深南大道 #10000: 腾讯大厦):
+	|*| https://api.map.baidu.com/marker?output=html&coord_type=wgs84&location=22.543415,113.929665
+	|*| https://api.map.baidu.com/marker?output=html&coord_type=gcj02&location=22.540385,113.934532
+	|*| https://api.map.baidu.com/marker?output=html&coord_type=bd09ll&location=22.546054,113.94108
+	|*| https://api.map.baidu.com/marker?output=html&coord_type=bd09mc&location=12684001,2560682.4
 
-Note "api.map.baidu.com" would response to Mainland China IP only.
+	Note "api.map.baidu.com" would response to Mainland China IP only.
 
 */
 
