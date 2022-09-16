@@ -1,34 +1,28 @@
 = Misc of the stepping data =
 
-Sample command for getting "BD09 (Referential)":
+	Sample command for getting "BD09 (Referential)":
 (Unix Shell)
-[
+[[
 	for x0 in 75 80 85 90 95 100 105 110 115 120 125 130; do curl -v -o "$null" 'https://api.map.baidu.com/marker?output=html&coord_type=wgs84&location=45,'"$x0" 2>&1 | grep -P -e '^< Location: \K.*$' -o | perlp 's/.*?[?&]latlng=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?).*/${1}, ${2}/s;'; sleep 1; done;
-]
+]]
+	Don't expect it to work directly on common systems.
 
-Don't expect it to work directly on common systems.
-
-
-Prerequisites:
-
-|1| "$null" is '/dev/null'. (`export null='/dev/null';`)
-|2| `curl`:
-[
+	Prerequisites:
+	|1| "$null" is '/dev/null'. (`export null='/dev/null';`)
+	|2| `curl`:
+[[
 	exec '/usr/bin/curl' -q \
 	--no-progress-meter \
 	--compressed \
 	-A '' \
 	-g "$@";
-]
-
-|3| `perlp`: [ https://github.com/MasterInQuestion/perlp/raw/main/perlp ]
-
+]]
+	|3| `perlp`: https://github.com/MasterInQuestion/perlp/raw/main/perlp
 
 
-
-Snippet for the stepping data generation:
+	Snippet for the stepping data generation:
 (Go)
-[
+[[
 	func main () {
 	WGS84 := [2](float64){ 30, 130 };
 	BD09 := [2](float64){ 30.003396, 130.011903 };
@@ -45,6 +39,7 @@ Snippet for the stepping data generation:
 
 	};
 
+// ----
 
 	func fp8 (
 	_0 float64,
@@ -60,4 +55,4 @@ Snippet for the stepping data generation:
 	};
 
 	};
-]
+]]
