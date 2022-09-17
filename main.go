@@ -4,7 +4,7 @@
 
 	[
 	|*| Source: https://github.com/MasterInQuestion/coordTransform/raw/master/main.go
-	|*| Last update: CE 2022-09-16 23:40 UTC ]
+	|*| Last update: CE 2022-09-17 23:28 UTC ]
 
 ----
 
@@ -599,7 +599,7 @@
 // === Testcase ===
 /*
 
-	Try at [ https://go.dev/play/p/UCPdVNrl0-P#code ]. (slight modification to the code required)
+	Try at [ https://gotipplay.golang.org/p/UCPdVNrl0-P#code ]. (slight modification to the code required)
 
 ==== Demo places ====
 
