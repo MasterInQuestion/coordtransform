@@ -4,7 +4,7 @@
 
 	[
 	|*| Source: https://github.com/MasterInQuestion/coordTransform/raw/master/main.go
-	|*| Last update: CE 2022-09-17 23:28 UTC ]
+	|*| Last update: CE 2024-03-08 19:00 UTC ]
 
 ----
 
@@ -626,21 +626,21 @@
 	BD09MC := [2](float64){ 12684001, 2560682.4 };
 
 	Print(
-	`|*| WGS84toGCJ02: ` + fp6( WGS84toGCJ02( WGS84[0], WGS84[1] ) ) + "\n", // Yet problematic. (probably not as much)
-	`|*| WGS84toBD09: ` + fp6( WGS84toBD09( WGS84[0], WGS84[1] ) ) + "\n",
-	`|*| WGS84toBD09MC: ` + fp1( WGS84toBD09MC( WGS84[0], WGS84[1] ) ) + "\n",
-	"\n",
-	`|*| GCJ02toWGS84: ` + fp6( GCJ02toWGS84( GCJ02[0], GCJ02[1] ) ) + "\n",
-	`|*| BD09toWGS84: ` + fp6( BD09toWGS84( BD09[0], BD09[1] ) ) + "\n",
-	`|*| BD09MCtoWGS84: ` + fp6( BD09MCtoWGS84( BD09MC[0], BD09MC[1] ) ) + "\n",
-	"\n",
-	`|*| GCJ02toBD09: ` + fp6( GCJ02toBD09( GCJ02[0], GCJ02[1] ) ) + "\n",
-	`|*| GCJ02toBD09MC: ` + fp1( GCJ02toBD09MC( GCJ02[0], GCJ02[1] ) ) + "\n",
-	`|*| BD09toGCJ02: ` + fp6( BD09toGCJ02( BD09[0], BD09[1] ) ) + "\n",
-	`|*| BD09MCtoGCJ02: ` + fp6( BD09MCtoGCJ02( BD09MC[0], BD09MC[1] ) ) + "\n",
-	"\n",
-	`|*| BD09toBD09MC: ` + fp1( BD09toBD09MC( BD09[0], BD09[1] ) ) + "\n",
-	`|*| BD09MCtoBD09: ` + fp6( BD09MCtoBD09( BD09MC[0], BD09MC[1] ) ) + "\n", // Caveat minor problems.
+`|*| WGS84toGCJ02: ` + fp6( WGS84toGCJ02( WGS84[0], WGS84[1] ) ) + "\n", // Yet problematic. (probably not as much)
+`|*| WGS84toBD09: ` + fp6( WGS84toBD09( WGS84[0], WGS84[1] ) ) + "\n",
+`|*| WGS84toBD09MC: ` + fp1( WGS84toBD09MC( WGS84[0], WGS84[1] ) ) + "\n",
+"\n",
+`|*| GCJ02toWGS84: ` + fp6( GCJ02toWGS84( GCJ02[0], GCJ02[1] ) ) + "\n",
+`|*| BD09toWGS84: ` + fp6( BD09toWGS84( BD09[0], BD09[1] ) ) + "\n",
+`|*| BD09MCtoWGS84: ` + fp6( BD09MCtoWGS84( BD09MC[0], BD09MC[1] ) ) + "\n",
+"\n",
+`|*| GCJ02toBD09: ` + fp6( GCJ02toBD09( GCJ02[0], GCJ02[1] ) ) + "\n",
+`|*| GCJ02toBD09MC: ` + fp1( GCJ02toBD09MC( GCJ02[0], GCJ02[1] ) ) + "\n",
+`|*| BD09toGCJ02: ` + fp6( BD09toGCJ02( BD09[0], BD09[1] ) ) + "\n",
+`|*| BD09MCtoGCJ02: ` + fp6( BD09MCtoGCJ02( BD09MC[0], BD09MC[1] ) ) + "\n",
+"\n",
+`|*| BD09toBD09MC: ` + fp1( BD09toBD09MC( BD09[0], BD09[1] ) ) + "\n",
+`|*| BD09MCtoBD09: ` + fp6( BD09MCtoBD09( BD09MC[0], BD09MC[1] ) ) + "\n", // Caveat minor problems.
 	);
 
 	};

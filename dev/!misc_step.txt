@@ -28,13 +28,13 @@
 	BD09 := [2](float64){ 30.003396, 130.011903 };
 
 	Print(
-	`	[` + "\n",
-	`	|*| WGS84: ` + fp6( WGS84[0], WGS84[1] ) + "\n",
-	`	|*| WGS84 (Back-Derived): ` + fp6( BD09toWGS84( BD09[0], BD09[1] ) ) + "\n",
-	`	|*| GCJ02 (Back-Derived): ` + fp8( BD09toGCJ02( BD09[0], BD09[1] ) ) + "\n",
-	`	|*| GCJ02: ` + fp8( WGS84toGCJ02( WGS84[0], WGS84[1] ) ) + "\n",
-	`	|*| BD09: ` + fp6( WGS84toBD09( WGS84[0], WGS84[1] ) ) + "\n",
-	`	|*| BD09 (Referential): ` + fp6( BD09[0], BD09[1] ) + ` ]` + "\n",
+`	[` + "\n",
+`	|*| WGS84: ` + fp6( WGS84[0], WGS84[1] ) + "\n",
+`	|*| WGS84 (Back-Derived): ` + fp6( BD09toWGS84( BD09[0], BD09[1] ) ) + "\n",
+`	|*| GCJ02 (Back-Derived): ` + fp8( BD09toGCJ02( BD09[0], BD09[1] ) ) + "\n",
+`	|*| GCJ02: ` + fp8( WGS84toGCJ02( WGS84[0], WGS84[1] ) ) + "\n",
+`	|*| BD09: ` + fp6( WGS84toBD09( WGS84[0], WGS84[1] ) ) + "\n",
+`	|*| BD09 (Referential): ` + fp6( BD09[0], BD09[1] ) + ` ]` + "\n",
 	);
 
 	};
