@@ -645,8 +645,7 @@
 
 	};
 
-
-
+// ----
 
 	var (
 	RE_0 = regexp.MustCompile( `\.?0+$` ); // Warning: This RegEx is not general-purpose safe.
