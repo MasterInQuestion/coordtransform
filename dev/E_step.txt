@@ -123,7 +123,8 @@
 	|*| GCJ02 (Back-Derived): 45.00069137, 75.00318746
 	|*| GCJ02: 45.00068464, 75.0031776
 	|*| BD09: 45.006907, 75.009545
-	|*| BD09 (Referential): 45.006914, 75.009555 ]
+	|*| BD09 (Referential): 45.006914, 75.009555
+	|*| Note: This BD09 (Referential) still matches as of 20240924. ]
 
 	[
 	|*| WGS84: 45, 80
