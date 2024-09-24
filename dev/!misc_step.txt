@@ -3,21 +3,11 @@
 	Sample command for getting "BD09 (Referential)":
 (Unix Shell)
 [[
-	for x0 in 75 80 85 90 95 100 105 110 115 120 125 130; do curl -v -o "$null" 'https://api.map.baidu.com/marker?output=html&coord_type=wgs84&location=45,'"$x0" 2>&1 | grep -P -e '^< Location: \K.*$' -o | perlp 's/.*?[?&]latlng=((?&x0)),((?&x0)).*(?(DEFINE) (?<x0>-?+\d++(?:\.\d++)?+) )/${1}, ${2}/s;'; sleep 1; done;
+	for x0 in 75 80 85 90 95 100 105 110 115 120 125 130; do curl -v --max-filesize 1 'https://api.map.baidu.com/marker?output=html&coord_type=wgs84&location=45,'"$x0" 2>&1 | grep -P -e '^< [Ll]ocation: \K.*$' -o | perlp 's/.*?[?&]latlng=((?&x0)),((?&x0)).*(?(DEFINE) (?<x0>-?+\d++(?:\.\d++)?+) )/${1}, ${2}\n/s;'; sleep 1; done;
 ]]
-	Don't expect it to work directly on common systems.
-
 	Prerequisites:
-	|1| "$null" is '/dev/null'. (`export null='/dev/null';`)
-	|2| `curl`:
-[[
-	exec '/usr/bin/curl' -q \
-	--no-progress-meter \
-	--compressed \
-	-A '' \
-	-g "$@";
-]]
-	|3| `perlp`: https://github.com/MasterInQuestion/perlp/raw/main/perlp
+	`curl`: https://github.com/MasterInQuestion/ShellUtils/commit/34910eb5ca7ff55f02d337f46aa75c031277ec66
+	`perlp`: https://github.com/MasterInQuestion/perlp/raw/main/perlp
 
 
 	Snippet for the stepping data generation:
