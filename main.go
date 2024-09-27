@@ -4,7 +4,7 @@
 
 	[
 	|*| Source: https://github.com/MasterInQuestion/coordTransform/raw/master/main.go
-	|*| Last update: CE 2024-03-08 19:00 UTC ]
+	|*| Last update: CE 2024-09-27 04:03 UTC ]
 
 ----
 
@@ -114,7 +114,7 @@
 	|*| https://github.com/kikkimo/WgsToGcj/blob/master/src/WGS2GCJ.cpp
 	|*| https://github.com/Artoria2e5/PRCoords
 	|*| https://chaoli.club/index.php/4777/p1#p49268
-	|*| https://atool.vip/lnglat/
+	|*| https://atool.vip/lnglat
 	; but only find out that they were either no better or worse.
 
 [ Additional Note:
@@ -615,7 +615,8 @@
 	|*| https://api.map.baidu.com/marker?output=html&coord_type=bd09ll&location=22.546054,113.94108
 	|*| https://api.map.baidu.com/marker?output=html&coord_type=bd09mc&location=12684001,2560682.4
 
-	Note "api.map.baidu.com" would response to Mainland China IP only.
+	Note "api.map.baidu.com" might response to Mainland China IP only.
+	[ ^ Not necessarily as of 20240924. ]
 
 */
 
